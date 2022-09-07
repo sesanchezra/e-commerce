@@ -1,0 +1,27 @@
+:root{
+    --grey: rgb(195,190,192);
+    --light--grey: rgb(216,215,219);
+    --dark: rgb(19,20,16);
+    --dark-grey:rgb(94,92,91);
+    --green: rgb(61,71,46);
+    --brown: rgb(144,127,114);
+}
+
+body{
+    margin: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    background-color: var(--light--grey);
+}
+
+
+.App{
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--light--grey);
+    color: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
