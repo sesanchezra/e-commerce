@@ -82,8 +82,10 @@
 
 /* Products Section */
 
+
+
 .home__products{
-    margin-top: 10%;
+    margin-top: 15%;
     width: 90%;
     display: grid;
     grid-template-columns: 1fr 1fr; 
@@ -129,6 +131,24 @@
 }
 
 .product__button:hover{
+    transform: scale(1.05);
+}
+
+.home__products__back{
+    position: relative;
+    top: 50px;
+    left: -38%;
+    background-color: rgb(61,71,46,0.6);
+    width: 40px;
+    aspect-ratio: 1;
+    border:none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home__products__back:hover{
     transform: scale(1.05);
 }
 

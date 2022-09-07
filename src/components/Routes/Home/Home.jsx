@@ -9,9 +9,10 @@ import { useForm } from 'react-hook-form'
 import { BsFillCartFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom'
 import Filter from '../Filter/Filter'
+import { BiArrowBack } from "react-icons/bi";
 
 const defaultValue = {
-    search: '   Search'
+    search: ''
 }
 
 const Home = () => {
@@ -32,21 +33,18 @@ const Home = () => {
 
     const [category, setCategory] = useState()
 
-    let productsCategory =[]
+    let productsCategory = []
 
-    if(category){
-        if(category != 'all'){
-            productsCategory  = products?.filter(product => product.category.name === category)
+    if (category) {
+        if (category != 'all') {
+            productsCategory = products?.filter(product => product.category.name === category)
         }
-        else{
+        else {
             setCategoryAll(!categoryAll)
             setCategory()
         }
-        
+
     }
-    
-    
-    console.log(productsCategory)
 
     //Configure Search
 
@@ -55,15 +53,36 @@ const Home = () => {
     const [search, setSearch] = useState()
 
     const submit = (data) => {
-        setSearch(data)
+        setSearch(data.search)
         reset(defaultValue)
     }
+
+    if (search) {
+        let searchSplit = search.split(' ')
+        if(productsCategory.length === 0){
+            productsCategory = products?.filter(product => product.title.split(' ')[0].toLowerCase() == searchSplit[0].toLowerCase())
+        }
+        else if(productsCategory.length === 0){
+            productsCategory = products?.filter(product => product.title.split(' ')[1].toLowerCase() == searchSplit[0].toLowerCase())
+        }
+        else if(productsCategory.length === 0){
+            productsCategory = products?.filter(product => product.title.split(' ')[2].toLowerCase() == searchSplit[0].toLowerCase())
+        }
+    }
+
+    console.log(productsCategory)
+
+    useEffect(() => {
+        if (search) {
+            setCategory('search')
+        }
+    }, [productsCategory])
 
     //Configure click product to /product/:id
 
     const navigate = useNavigate()
 
-    const goToProduct = (id) =>{
+    const goToProduct = (id) => {
         navigate(`/product/${id}`)
     }
 
@@ -71,10 +90,17 @@ const Home = () => {
 
     const [filter, setFilter] = useState(false)
 
-    const showFilter =() =>{
+    const showFilter = () => {
         setFilter(!filter)
     }
 
+    //Back to All
+
+    const back = () => {
+        setCategory()
+        setSearch()
+        setFilter(false)
+    }
 
     return (
         <div className='Home'>
@@ -95,35 +121,41 @@ const Home = () => {
             </div>
 
             {
-                filter &&  
+                filter &&
                 <Filter
-                setCategory={setCategory}
+                    setCategory={setCategory}
                 />
             }
 
-            
-
+            {
+                category &&
+                <IconContext.Provider value={{ size: '1.5em' ,color: 'white' }}>
+                    <button onClick={back} className='home__products__back'>
+                        <BiArrowBack />
+                    </button>
+                </IconContext.Provider>
+            }
             <div className='home__products'>
                 <div className='title'>
                     {
                         category ?
                             <h2>Found {productsCategory?.length} results</h2>
-                        :
+                            :
                             <h2>Found {products?.length} results</h2>
                     }
-                    
+
                 </div>
                 {
                     category ?
                         productsCategory?.map(product => (
-                            <button className={`product__button`} key={product.title} onClick={()=> goToProduct(product.id)}>
+                            <button className={`product__button`} key={product.title} onClick={() => goToProduct(product.id)}>
                                 <img src={product.productImgs[0]} alt="" />
                                 <div className='product__description'>
                                     <h3>{product.title}</h3>
                                     <div className='product__section'>
                                         <h4>{`$ ${product.price}`}</h4>
                                         <button className='product__add'>
-                                            <IconContext.Provider value={{ size: '1.5em' , color: 'white'}}>
+                                            <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                                                 <BsFillCartFill />
                                             </IconContext.Provider>
                                         </button>
@@ -132,16 +164,16 @@ const Home = () => {
                             </button>
 
                         ))
-                    :
+                        :
                         products?.map(product => (
-                            <button className={`product-${product.id} product__button`} key={product.title} onClick={()=> goToProduct(product.id)}>
+                            <button className={`product-${product.id} product__button`} key={product.title} onClick={() => goToProduct(product.id)}>
                                 <img src={product.productImgs[0]} alt="" />
                                 <div className='product__description'>
                                     <h3>{product.title}</h3>
                                     <div className='product__section'>
                                         <h4>{`$ ${product.price}`}</h4>
                                         <button className='product__add'>
-                                            <IconContext.Provider value={{ size: '1.5em' , color: 'white'}}>
+                                            <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                                                 <BsFillCartFill />
                                             </IconContext.Provider>
                                         </button>
@@ -152,6 +184,7 @@ const Home = () => {
                             </button>
                         ))
                 }
+
 
             </div>
 

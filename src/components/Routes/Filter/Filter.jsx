@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import '../Filter/Filter.css'
 
-const Filter = ({ setCategory } ) => {
+const Filter = ({ setCategory }) => {
 
     const [categories, setCategories] = useState()
 
@@ -12,7 +12,7 @@ const Filter = ({ setCategory } ) => {
             .catch(error => console.log(error))
     }, [])
 
-    const filterByCategory = (category) =>{
+    const filterByCategory = (category) => {
         setCategory(category)
     }
 
@@ -21,16 +21,17 @@ const Filter = ({ setCategory } ) => {
         <div className='Filter'>
             <h3>Categories</h3>
             <div className='filter__categories__section'>
+                <button className='filter__category' onClick={() => setCategory('all')}>
+                    All
+                </button>
                 {
                     categories?.map(category => (
-                        <button className='filter__category' key={category.name} onClick={()=>filterByCategory(category.name)}>
+                        <button className='filter__category' key={category.name} onClick={() => filterByCategory(category.name)}>
                             {category.name}
                         </button>
                     ))
                 }
-                <button className='filter__category' onClick={() => setCategory('all')}>
-                        All
-                </button>
+
             </div>
         </div>
     )
