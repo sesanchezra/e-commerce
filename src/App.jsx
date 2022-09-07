@@ -8,6 +8,7 @@ import Purchases from './components/Routes/Purchases/Purchases'
 import Header from './components/shared/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from './store/slices/products.slice'
+import Footer from './components/shared/Footer'
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
         <Route path='/purchases' element={ <Purchases /> }/>
         <Route path='/product/:id' element={ <ProductDetail /> }/>
       </Routes>
+        <Footer />
     </div>
   )
 }

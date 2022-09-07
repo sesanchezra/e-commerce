@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Avestan&display=swap');
+
 :root{
     --grey: rgb(195,190,192);
     --light--grey: rgb(216,215,219);
@@ -15,7 +17,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    font-family: 'Noto Sans Avestan', sans-serif;
 }
 
 .home__search{
@@ -102,7 +104,7 @@
     gap: 1% 5%;
     justify-items: center;
     position:relative;
-    margin-bottom: 40%;
+    margin-bottom: 50%;
 }
 
 /* Grid names */
@@ -121,7 +123,13 @@
 
 .title{
     height: 50px;
+    padding-left: 10%;
+    font-size: 20px;
+    
+}
 
+.product__button:hover{
+    transform: scale(1.05);
 }
 
 .home__products > button {
@@ -171,4 +179,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.product__section button:hover{
+    transform: scale(1.05);
 }

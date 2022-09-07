@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Avestan&display=swap');
+
+.Footer{
+    width: 100%;
+    height: 80px;
+    background-color:rgb(19,20,16) ;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Noto Sans Avestan', sans-serif;
+    font-size: 12px;
+}

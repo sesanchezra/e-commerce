@@ -7,6 +7,8 @@ import { IconContext } from "react-icons"
 import { BsFilter } from "react-icons/bs"
 import { useForm } from 'react-hook-form'
 import { BsFillCartFill } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom'
+import Filter from '../Filter/Filter'
 
 const defaultValue = {
     search: '   Search'
@@ -14,13 +16,39 @@ const defaultValue = {
 
 const Home = () => {
 
+    //Llamado inicial de products del store
+
     const products = useSelector(state => state.products)
 
     const dispatch = useDispatch()
 
+    const [categoryAll, setCategoryAll] = useState(false)
+
     useEffect(() => {
         dispatch(getProducts())
-    }, [])
+    }, [categoryAll])
+
+    //Configure Filter
+
+    const [category, setCategory] = useState()
+
+    let productsCategory =[]
+
+    if(category){
+        if(category != 'all'){
+            productsCategory  = products?.filter(product => product.category.name === category)
+        }
+        else{
+            setCategoryAll(!categoryAll)
+            setCategory()
+        }
+        
+    }
+    
+    
+    console.log(productsCategory)
+
+    //Configure Search
 
     const { register, handleSubmit, reset } = useForm()
 
@@ -31,7 +59,21 @@ const Home = () => {
         reset(defaultValue)
     }
 
-    console.log(products)
+    //Configure click product to /product/:id
+
+    const navigate = useNavigate()
+
+    const goToProduct = (id) =>{
+        navigate(`/product/${id}`)
+    }
+
+    //Filter configure
+
+    const [filter, setFilter] = useState(false)
+
+    const showFilter =() =>{
+        setFilter(!filter)
+    }
 
 
     return (
@@ -46,35 +88,69 @@ const Home = () => {
                     <input type="text" placeholder='   Search' {...register('search')} />
                 </form>
                 <IconContext.Provider value={{ size: '1.8em' }}>
-                    <button className='home__filters'>
+                    <button className='home__filters' onClick={showFilter}>
                         <BsFilter />
                     </button>
                 </IconContext.Provider>
             </div>
 
+            {
+                filter &&  
+                <Filter
+                setCategory={setCategory}
+                />
+            }
+
+            
+
             <div className='home__products'>
                 <div className='title'>
-                    <h2>Found {products?.length} results</h2>
+                    {
+                        category ?
+                            <h2>Found {productsCategory?.length} results</h2>
+                        :
+                            <h2>Found {products?.length} results</h2>
+                    }
+                    
                 </div>
                 {
-                    products?.map(product => (
-                        <button className={`product-${product.id}`} key={product.title}>
-                            <img src={product.productImgs[0]} alt="" />
-                            <div className='product__description'>
-                                <h3>{product.title}</h3>
-                                <div className='product__section'>
-                                    <h4>{`$ ${product.price}`}</h4>
-                                    <button className='product__add'>
-                                        <IconContext.Provider value={{ size: '1.5em' , color: 'white'}}>
-                                            <BsFillCartFill />
-                                        </IconContext.Provider>
-                                    </button>
+                    category ?
+                        productsCategory?.map(product => (
+                            <button className={`product__button`} key={product.title} onClick={()=> goToProduct(product.id)}>
+                                <img src={product.productImgs[0]} alt="" />
+                                <div className='product__description'>
+                                    <h3>{product.title}</h3>
+                                    <div className='product__section'>
+                                        <h4>{`$ ${product.price}`}</h4>
+                                        <button className='product__add'>
+                                            <IconContext.Provider value={{ size: '1.5em' , color: 'white'}}>
+                                                <BsFillCartFill />
+                                            </IconContext.Provider>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </button>
+
+                        ))
+                    :
+                        products?.map(product => (
+                            <button className={`product-${product.id} product__button`} key={product.title} onClick={()=> goToProduct(product.id)}>
+                                <img src={product.productImgs[0]} alt="" />
+                                <div className='product__description'>
+                                    <h3>{product.title}</h3>
+                                    <div className='product__section'>
+                                        <h4>{`$ ${product.price}`}</h4>
+                                        <button className='product__add'>
+                                            <IconContext.Provider value={{ size: '1.5em' , color: 'white'}}>
+                                                <BsFillCartFill />
+                                            </IconContext.Provider>
+                                        </button>
+                                    </div>
+                                </div>
 
 
-                        </button>
-                    ))
+                            </button>
+                        ))
                 }
 
             </div>
