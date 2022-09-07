@@ -1,12 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Avestan&display=swap');
+
+
+:root{
+    --grey: rgb(195,190,192);
+    --light--grey: rgb(216,215,219);
+    --dark: rgb(19,20,16);
+    --dark-grey:rgb(94,92,91);
+    --green: rgb(61,71,46);
+    --brown: rgb(144,127,114);
+}
+
+
 .Product{
     width: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    position: relative;
+    font-family: 'Noto Sans Avestan', sans-serif;
 }
 
-.Product > img{
-    height: 400px;
+.product__title{
+    width: 100%;
+    position:relative;
+    top: 0%;
+    left: 10%;
+    display: flex;
+    align-items: baseline;
+    gap: 2%;
 }
+
+.product__title .home{
+    color:var(--green)
+}
+
+
+.product__title .separator {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--green);
+    border-radius: 5px;
+
+}
+
+.product__title span{
+    color: var(--green)
+}
+
+.product__info{
+    width: 90%;
+    margin-top: 10%;
+}
+
+.product__info .product__img__slider{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.product__info .product__img__slider button{
+    position:sticky;
+    left: 0;
+    background-color: white;
+    width: 35px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border:none;
+}
+
+.product__info .product__img__slider button:hover{
+    background-color: var(--green);
+}
+
+.product__img__content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 380px;
+    margin: 0 2% 0 2%;
+    background-color: white;
+    height: 250px ;
+    border-radius: 50px;
+}
+
+
+.product__info .product__img__slider .product__img{
+    height: 180px;
+    
+}
+
+.slide{
+    transform: translateX(200%);
+    opacity: 0.5;
+    transition: transform 1s step-end;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active{
+    transform: translateX(0%);
+    opacity: 1;
+    
+}
+
+
