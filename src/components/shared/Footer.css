@@ -10,4 +10,6 @@
     align-items: center;
     font-family: 'Noto Sans Avestan', sans-serif;
     font-size: 12px;
+    position: fixed;
+    bottom: 0;
 }

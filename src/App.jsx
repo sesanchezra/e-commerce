@@ -11,6 +11,7 @@ import { getProducts } from './store/slices/products.slice'
 import Footer from './components/shared/Footer'
 import axios from 'axios'
 import Cart from './components/shared/Cart/Cart'
+import ProtectedRoutes from './components/Routes/ProtectedRoutes'
 
 function App() {
 
@@ -44,9 +45,12 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/purchases' element={<Purchases />} />
         <Route path='/product/:id' element={<ProductDetail />} />
-        <Route path='/cart' element={<Cart />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path='/purchases' element={<Purchases />} />
+          <Route path='/cart' element={<Cart />} />
+        </Route>
+        
       </Routes>
       <Footer />
     </div>

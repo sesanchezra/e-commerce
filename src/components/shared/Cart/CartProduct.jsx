@@ -1,16 +1,16 @@
 import React from 'react'
+import '../Cart/CartProduct.css'
 
-const CartProduct = () => {
+const CartProduct = ({product}) => {
     return (
         <div className='product__cart'>
-            <h3>Samsung</h3>
-            <h4>Samsung S20 NOTE</h4>
+            <h3>{product?.brand}</h3>
+            <h4>{product?.title}</h4>
             <button>
                 delete
             </button>
-            <span>1</span>
-            <span>Total</span>
-            <p>$850</p>
+            <p>{product?.price}</p>
+            <span>{product?.productsInCart.quantity}</span>
         </div>
     )
 }

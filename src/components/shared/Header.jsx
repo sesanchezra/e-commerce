@@ -34,19 +34,24 @@ const Header = () => {
                             className={({ isActive }) => isActive ? 'active-link' : undefined}
                         >
                             <IconContext.Provider value={{ className: "header__shopbag__icon", size: '2em' }}>
-                            <button className='header__button'>
-                                <BiHistory />
-                            </button>
+                                <button className='header__button'>
+                                    <BiHistory />
+                                </button>
                             </IconContext.Provider>
-                            
+
                         </NavLink>
                     </li>
                     <li className="header__item">
-                        <IconContext.Provider value={{ className: "header__shopbag__icon", size: '2em' }}>
-                            <button className='header__button'>
-                                <HiOutlineShoppingBag />
-                            </button>
-                        </IconContext.Provider>
+                        <NavLink
+                            to='/cart'
+                            className={({ isActive }) => isActive ? 'active-link' : undefined}
+                        >
+                            <IconContext.Provider value={{ className: "header__shopbag__icon", size: '2em' }}>
+                                <button className='header__button'>
+                                    <HiOutlineShoppingBag />
+                                </button>
+                            </IconContext.Provider>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>

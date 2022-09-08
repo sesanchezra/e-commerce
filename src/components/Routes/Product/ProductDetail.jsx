@@ -73,7 +73,31 @@ const ProductDetail = () => {
         window.location.reload()
     }
 
-    console.log(productsCategory)
+    //Función agregar al carrito
+
+    const addToCart = (productId,productQuantity) =>{
+        const url =`https://ecommerce-api-react.herokuapp.com/api/v1/cart`
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }
+
+        const product = {
+            id: productId,
+            quantity: productQuantity,
+        }
+
+        axios.post(url , product , config)
+            .then(res=> {
+                console.log(res.data)
+                console.log('si se envió')
+            })
+            .catch(error=> console.log(error))
+
+    }
+
     return (
         <div className='Product'>
             <div className='product__title'>
@@ -89,7 +113,7 @@ const ProductDetail = () => {
                     <div className='product__img__content'>
                         {
                             product?.productImgs.map((image, index) => (
-                                <div className={currentImg == index ? 'slide active' : 'slide'}>
+                                <div className={currentImg == index ? 'slide active' : 'slide'} key={image}>
                                     {
                                         currentImg == index && (
                                             <img src={image} alt="product__img" className='product__img' />
@@ -125,7 +149,7 @@ const ProductDetail = () => {
 
                         </div>
                         <div className='product__add'>
-                            <button className='product__add__button'>
+                            <button className='product__add__button' onClick={()=> addToCart(product?.id,quantity)}>
                                 <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                                     <BsFillCartFill />
                                 </IconContext.Provider>
@@ -147,7 +171,7 @@ const ProductDetail = () => {
                     <div className='product__similar'>
                         {
                             productsCategory?.map(productFilter => (
-                                <div className='product__similar__box' key={productFilter.name} onClick={() => goToSimilar(productFilter.id)}>
+                                <div className='product__similar__box' key={productFilter.name} key={productFilter.id} onClick={() => goToSimilar(productFilter.id)}>
                                     <img src={productFilter.productImgs[0]} alt="product" className='product__similar__img' />
                                     <div className='product__simlar__description'>
                                         <h5>{productFilter.title}</h5>

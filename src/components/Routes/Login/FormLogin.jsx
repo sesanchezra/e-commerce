@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './FormLogin.css'
 import ModalLogin from './ModalLogin'
-import {setUser} from '../../../store/slices/user.slice'
-import {setToken } from '../../../store/slices/token.slice'
+import { setUser } from '../../../store/slices/user.slice'
+import { setToken } from '../../../store/slices/token.slice'
 
 const defaultValue = {
     email: '',
@@ -33,7 +33,11 @@ const FormLogin = () => {
 
     //
 
-    
+    const logout = () =>{
+        localStorage.removeItem('token')
+        navigate('/')
+    }
+
 
     return (
         <>
@@ -42,10 +46,16 @@ const FormLogin = () => {
                     // <ModalLogin
                     //     user={user}
                     // />
-                    <h2>You are logged</h2>
+                    <div>
+                        <h2>You are logged</h2>
+                        <button onClick={logout}>
+                            Logout
+                        </button>
+                    </div>
+
 
                     // <h2>Logged</h2>
-                :
+                    :
                     <form action="" onSubmit={handleSubmit(login)} className='FormLogin'>
                         <h2>Welcome 👋 ! Please Login</h2>
                         <div className='formlogin__email'>

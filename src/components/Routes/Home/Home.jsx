@@ -116,10 +116,9 @@ const Home = () => {
             quantity: 1,
         }
 
-        axios.post(url,product,config)
+        axios.post(url , product , config)
             .then(res=> {
                 console.log(res.data)
-                console.log('si se envió')
             })
             .catch(error=> console.log(error))
 
