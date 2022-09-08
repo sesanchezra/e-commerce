@@ -43,7 +43,6 @@ const Home = () => {
             setCategoryAll(!categoryAll)
             setCategory()
         }
-
     }
 
     //Configure Search

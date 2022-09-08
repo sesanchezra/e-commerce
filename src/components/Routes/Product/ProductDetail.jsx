@@ -1,10 +1,17 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import '../Product/ProductDetail.css'
 import { GrNext, GrPrevious } from "react-icons/gr";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { IconContext } from "react-icons"
+import { BsFillCartFill } from "react-icons/bs";
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../../store/slices/products.slice';
 
 const ProductDetail = () => {
+
+    //Solicitud producto por id
 
     const { id } = useParams()
 
@@ -14,8 +21,6 @@ const ProductDetail = () => {
             .then(res => setProduct(res.data.data.product))
             .catch(error => console.log(error))
     }, [])
-
-    console.log(product)
 
     //Slider
 
@@ -33,12 +38,48 @@ const ProductDetail = () => {
 
     }
 
+    //Quantity
+
+    const [quantity, setQuantity] = useState(1)
+
+    const minus = () => {
+        if (quantity > 0) {
+            setQuantity(quantity - 1)
+        }
+    }
+    const plus = () => {
+
+        setQuantity(quantity + 1)
+
+    }
+
+    //Similar products
+
+    const dispatch = useDispatch()
+
+    const products = useSelector(state => state.products)
+
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [])
+
+    let productsCategory = products?.filter(productFilter => productFilter.category.name === product?.category)
+
+    const navigate=useNavigate()
+    
+
+    const goToSimilar = (id) =>{
+        navigate(`/product/${id}`)
+        window.location.reload()
+    }
+
+    console.log(productsCategory)
     return (
         <div className='Product'>
             <div className='product__title'>
                 <h3 className='home'>Home</h3>
                 <div className='separator'></div>
-                <h3>{product?.title}</h3>
+                <h4>{product?.title}</h4>
             </div>
             <div className='product__info'>
                 <div className='product__img__slider'>
@@ -48,10 +89,10 @@ const ProductDetail = () => {
                     <div className='product__img__content'>
                         {
                             product?.productImgs.map((image, index) => (
-                                <div className={currentImg == index ? 'slide active': 'slide'}>
+                                <div className={currentImg == index ? 'slide active' : 'slide'}>
                                     {
                                         currentImg == index && (
-                                            <img src={image} alt="product__img" className='product__img'/>
+                                            <img src={image} alt="product__img" className='product__img' />
                                         )
                                     }
                                 </div>
@@ -64,11 +105,69 @@ const ProductDetail = () => {
                     </button>
                 </div>
 
-                <div className='product__description'>
+                <div className='product__description__detail'>
                     <h3>{product?.title}</h3>
+                    <div className='product__price__quantity'>
+                        <div className='product__price'>
+                            <h5>Price</h5>
+                            <h3>{`$ ${product?.price}`}</h3>
+                        </div>
+                        <div className='product__quantity'>
+                            <div className='quantifier'>
+                                <button className='minus' onClick={minus}>
+                                    <AiOutlineMinus />
+                                </button>
+                                <h5>{quantity}</h5>
+                                <button className='plus' onClick={plus}>
+                                    <AiOutlinePlus />
+                                </button>
+                            </div>
+
+                        </div>
+                        <div className='product__add'>
+                            <button className='product__add__button'>
+                                <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+                                    <BsFillCartFill />
+                                </IconContext.Provider>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div className='product__text__long'>
+                        <p>
+                            {product?.description}
+                        </p>
+                    </div>
+
+                    <hr />
+
+                    <div className='product__similar'>
+                        {
+                            productsCategory?.map(productFilter => (
+                                <div className='product__similar__box' key={productFilter.name} onClick={() => goToSimilar(productFilter.id)}>
+                                    <img src={productFilter.productImgs[0]} alt="product" className='product__similar__img' />
+                                    <div className='product__simlar__description'>
+                                        <h5>{productFilter.title}</h5>
+                                        <div className='product__similar__description__section'>
+                                            <h6>{`$ ${productFilter.price}`}</h6>
+                                            <button className='product__similar__description__button'>
+                                                <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+                                                    <BsFillCartFill />
+                                                </IconContext.Provider>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+
+                    </div>
                 </div>
 
-                
+
             </div>
 
         </div>
