@@ -1,0 +1,9 @@
+.Purchase{
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+    margin-bottom: 15vh;
+}

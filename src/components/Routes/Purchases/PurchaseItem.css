@@ -1,0 +1,33 @@
+
+:root{
+    --grey: rgb(195,190,192);
+    --light--grey: rgb(216,215,219);
+    --dark: rgb(19,20,16);
+    --dark-grey:rgb(94,92,91);
+    --green: rgb(61,71,46);
+    --brown: rgb(144,127,114);
+}
+
+.Purchase__item{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid white;
+}
+
+.Purchase__item > span{
+    width: 40%;
+}
+
+.Purchase__item > p{
+    color: black;
+    font-weight: 600;
+}
+
+.Purchase__item > p > span{
+    color: rgb(94,92,91,0.5);
+    font-size: 10px;
+}
