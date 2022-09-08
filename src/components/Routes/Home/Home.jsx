@@ -10,6 +10,7 @@ import { BsFillCartFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom'
 import Filter from '../Filter/Filter'
 import { BiArrowBack } from "react-icons/bi";
+import axios from 'axios'
 
 const defaultValue = {
     search: ''
@@ -69,8 +70,6 @@ const Home = () => {
         }
     }
 
-    console.log(productsCategory)
-
     useEffect(() => {
         if (search) {
             setCategory('search')
@@ -99,6 +98,31 @@ const Home = () => {
         setCategory()
         setSearch()
         setFilter(false)
+    }
+
+    // Agregar producto al carrito 
+
+    const addToCart = (productId) =>{
+        const url =`https://ecommerce-api-react.herokuapp.com/api/v1/cart`
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }
+
+        const product = {
+            id: productId,
+            quantity: 1,
+        }
+
+        axios.post(url,product,config)
+            .then(res=> {
+                console.log(res.data)
+                console.log('si se envió')
+            })
+            .catch(error=> console.log(error))
+
     }
 
     return (
@@ -147,13 +171,13 @@ const Home = () => {
                 {
                     category ?
                         productsCategory?.map(product => (
-                            <button className={`product__button`} key={product.title} onClick={() => goToProduct(product.id)}>
-                                <img src={product.productImgs[0]} alt="" />
+                            <button className={`product__button`} key={product.title} >
+                                <img src={product.productImgs[0]} alt="" onClick={() => goToProduct(product.id)}/>
                                 <div className='product__description'>
                                     <h3>{product.title}</h3>
                                     <div className='product__section'>
                                         <h4>{`$ ${product.price}`}</h4>
-                                        <button className='product__add'>
+                                        <button className='product__add' onClick={()=>addToCart(product.id)}>
                                             <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                                                 <BsFillCartFill />
                                             </IconContext.Provider>
@@ -165,13 +189,13 @@ const Home = () => {
                         ))
                         :
                         products?.map(product => (
-                            <button className={`product-${product.id} product__button`} key={product.title} onClick={() => goToProduct(product.id)}>
-                                <img src={product.productImgs[0]} alt="" />
+                            <button className={`product-${product.id} product__button`} key={product.title} >
+                                <img src={product.productImgs[0]} alt="" onClick={() => goToProduct(product.id)}/>
                                 <div className='product__description'>
                                     <h3>{product.title}</h3>
                                     <div className='product__section'>
                                         <h4>{`$ ${product.price}`}</h4>
-                                        <button className='product__add'>
+                                        <button className='product__add' onClick={()=>addToCart(product.id)}>
                                             <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                                                 <BsFillCartFill />
                                             </IconContext.Provider>

@@ -1,9 +1,11 @@
 import React from 'react'
+import FormLogin from './FormLogin'
+import './Login.css'
 
 const Login = () => {
     return (
-        <div>
-            Login
+        <div className='Login'>
+            <FormLogin />
         </div>
     )
 }

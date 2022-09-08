@@ -1,0 +1,82 @@
+
+:root{
+    --grey: rgb(195,190,192);
+    --light--grey: rgb(216,215,219);
+    --dark: rgb(19,20,16);
+    --dark-grey:rgb(94,92,91);
+    --green: rgb(61,71,46);
+    --brown: rgb(144,127,114);
+}
+
+.FormLogin{
+    min-height: 50vh;
+    width: 80%;
+    /* border: 1px solid red; */
+    background-color: white;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+    
+}
+
+.FormLogin h2{
+    font-size: 18px;
+    margin: 0;
+}
+
+.formlogin__email{
+    width: 80%;
+    gap: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.formlogin__email> input{
+    border-radius: 20px;
+    border:1px solid var(--green);
+    height: 4vh;
+}
+
+.formlogin__email__input:focus{
+    outline: none;
+    border: 1px solid var(--green);
+    background-color: rgb(61,71,46,0.3);
+}
+
+.formlogin__password{
+    width: 80%;
+    gap: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.formlogin__password__input:focus{
+    outline: none;
+    border: 1px solid var(--green);
+    background-color: rgb(61,71,46,0.3);
+}
+
+.formlogin__password> input{
+    border-radius: 20px;
+    border:1px solid var(--green);
+    height: 4vh;
+    margin-bottom: 0%;
+}
+
+.formlogin__button{
+    width: 40%;
+    background-color: var(--dark);
+    color: white;
+    height: 5vh;
+    border-radius: 20px;
+    border: none;
+}
+
+.formlogin__button:hover{
+    background-color: rgb(61,71,46,0.9);
+}
