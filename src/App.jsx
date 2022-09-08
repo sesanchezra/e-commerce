@@ -11,7 +11,7 @@ import { getProducts } from './store/slices/products.slice'
 import Footer from './components/shared/Footer'
 import axios from 'axios'
 import Cart from './components/shared/Cart/Cart'
-import ProtectedRoutes from './components/Routes/ProtectedRoutes'
+import ProtectedRoutes from '../src/components/shared/ProtectedRoutes'
 
 function App() {
 
