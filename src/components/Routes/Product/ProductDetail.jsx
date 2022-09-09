@@ -159,11 +159,11 @@ const ProductDetail = () => {
                         <div className='product__quantity'>
                             <div className='quantifier'>
                                 <button className='minus' onClick={minus}>
-                                    <AiOutlineMinus />
+                                    <h4>-</h4>
                                 </button>
                                 <h5>{quantity}</h5>
                                 <button className='plus' onClick={plus}>
-                                    <AiOutlinePlus />
+                                    <h4>+</h4>
                                 </button>
                             </div>
 

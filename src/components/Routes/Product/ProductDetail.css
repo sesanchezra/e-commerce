@@ -310,3 +310,7 @@
 .product__similar__description__button:hover{
     transform: scale(1.05);
 }
+
+.quantifier h4{
+    margin: 0;
+}
