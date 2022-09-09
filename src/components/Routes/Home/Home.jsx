@@ -144,14 +144,14 @@ const Home = () => {
             
             <div className='home__search'>
                 <form action="search" className='home__search__form' onSubmit={handleSubmit(submit)}>
-                    <IconContext.Provider value={{ size: '1.8em', className: 'home__search__icon' }}>
+                    <IconContext.Provider value={{ size: '1.8em', className: 'home__search__icon' , color: 'black'}}>
                         <button className='home__search__icon'>
                             <FiSearch />
                         </button>
                     </IconContext.Provider>
                     <input type="text" placeholder='   Search' {...register('search')} />
                 </form>
-                <IconContext.Provider value={{ size: '1.8em' }}>
+                <IconContext.Provider value={{ size: '1.8em' , color: 'black'}}>
                     <button className='home__filters' onClick={showFilter}>
                         <BsFilter />
                     </button>
