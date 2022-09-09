@@ -116,7 +116,6 @@ const ProductDetail = () => {
             .catch(error=> console.log(error))
 
     }
-    console.log(cartProducts)
 
     return (
         <div className='Product'>
