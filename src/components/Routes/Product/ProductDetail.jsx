@@ -73,9 +73,28 @@ const ProductDetail = () => {
         window.location.reload()
     }
 
+    
+    
+    // Traer productos del carrito 
+    
+    const [cartProducts, setCartProducts] = useState()
+    
+    useEffect(() => {
+        
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }
+        
+        axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/cart`, config)
+        .then(res => setCartProducts(res.data.data.cart.products))
+        .catch(error => console.log(error))
+    }, [])
+    
     //Función agregar al carrito
 
-    const addToCart = (productId,productQuantity) =>{
+    const addToCart = (productId,productQuantity,cartProducts) =>{
         const url =`https://ecommerce-api-react.herokuapp.com/api/v1/cart`
 
         const config = {
@@ -97,6 +116,7 @@ const ProductDetail = () => {
             .catch(error=> console.log(error))
 
     }
+    console.log(cartProducts)
 
     return (
         <div className='Product'>

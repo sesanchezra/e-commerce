@@ -1,6 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import CartProduct from './CartProduct'
+import './Cart.css'
+import { useDispatch } from 'react-redux'
+import {setItemsCart} from '../../../store/slices/itemsCart.slice'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
 
@@ -33,6 +37,12 @@ const Cart = () => {
     }
 
     // Funcion purchase carrito
+    const dispatch=useDispatch()
+    
+    const setItems = ()=>dispatch(setItemsCart(cartProducts?.length ? cartProducts?.length : 0))
+    setItems()
+
+    const navigate = useNavigate()
 
     const purchaseCart = () => {
         const config = {
@@ -54,11 +64,18 @@ const Cart = () => {
         axios.post(URL,shippingData,config)
             .then(res=>console.log(res.data))
             .catch(error=>console.log(error))
+        
+        navigate('/')
+        setItems(0)
     }
+
+    
+
+    
 
     return (
         <div className='cart'>
-            <h2>Cart</h2>
+            <h2>Shoping Bag</h2>
             {
                 cartProducts?.map(product => (
                     <CartProduct

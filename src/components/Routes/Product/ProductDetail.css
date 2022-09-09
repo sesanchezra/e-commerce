@@ -222,6 +222,11 @@
     border-radius: 25px;
 }
 
+
+.product__add__button:hover{
+    transform: scale(1.1);
+    transition: 0.5s linear;
+}
 .product__description__detail hr{
     width: 80%;
     color: var(--green);

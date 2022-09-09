@@ -4,9 +4,6 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './FormLogin.css'
-import ModalLogin from './ModalLogin'
-import { setUser } from '../../../store/slices/user.slice'
-import { setToken } from '../../../store/slices/token.slice'
 
 const defaultValue = {
     email: '',
