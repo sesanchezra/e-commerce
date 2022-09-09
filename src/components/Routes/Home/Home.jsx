@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import Filter from '../Filter/Filter'
 import { BiArrowBack } from "react-icons/bi";
 import axios from 'axios'
+import ModalLoading from './ModalLoading'
 
 const defaultValue = {
     search: ''
@@ -102,7 +103,11 @@ const Home = () => {
 
     // Agregar producto al carrito 
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const addToCart = (productId) =>{
+        setIsLoading(true)
+
         const url =`https://ecommerce-api-react.herokuapp.com/api/v1/cart`
 
         const config = {
@@ -119,13 +124,24 @@ const Home = () => {
         axios.post(url , product , config)
             .then(res=> {
                 console.log(res.data)
+                // setTimeout(setIsLoading(false),1000);
+                setIsLoading(false)
             })
-            .catch(error=> console.log(error))
+            .catch(error=> {console.log(error), setIsLoading(false)})
+
+        
 
     }
 
+        
+
     return (
         <div className='Home'>
+            {
+                isLoading &&
+                    <ModalLoading />
+            }
+            
             <div className='home__search'>
                 <form action="search" className='home__search__form' onSubmit={handleSubmit(submit)}>
                     <IconContext.Provider value={{ size: '1.8em', className: 'home__search__icon' }}>
