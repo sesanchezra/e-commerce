@@ -25,7 +25,7 @@ const Header = () => {
                             to='/login'
                             className={({ isActive }) => isActive ? 'active-link' : undefined}
                         >
-                            <IconContext.Provider value={{ className: "header__shopbag__icon", size: '1.8em' }}>
+                            <IconContext.Provider value={{ className: "header__shopbag__icon", size: '1.8em' , color: 'black'}}>
                                 <button className={`header__button`} >
                                     <AiOutlineUser />
                                 </button>
@@ -38,7 +38,7 @@ const Header = () => {
                             to='/purchases'
                             className={({ isActive }) => isActive ? 'active-link' : undefined}
                         >
-                            <IconContext.Provider value={{ className: "header__shopbag__icon", size: '2em' }}>
+                            <IconContext.Provider value={{ className: "header__shopbag__icon", size: '2em' , color: 'black'}}>
                                 <button className='header__button'>
                                     <BiHistory />
                                 </button>
@@ -51,7 +51,7 @@ const Header = () => {
                             to='/cart'
                             className={({ isActive }) => isActive ? 'active-link'  : undefined}
                         >
-                            <IconContext.Provider value={{ className: "header__shopbag__icon", size: '2em' }}>
+                            <IconContext.Provider value={{ className: "header__shopbag__icon", size: '2em' , color: 'black'}}>
                                 {
                                     itemsCart>0 && 
                                         <ItemsCart
