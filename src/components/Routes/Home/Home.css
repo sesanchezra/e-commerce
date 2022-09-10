@@ -103,7 +103,7 @@
     "product-7 product-11"
     "product-7 product-8"
     ". product-8";
-    gap: 1% 5%;
+    gap: 5% 1%;
     justify-items: center;
     position:relative;
     margin-bottom: 50%;
@@ -131,9 +131,7 @@
     
 }
 
-.product__button:hover{
-    transform: scale(1.05);
-}
+
 
 .home__products__back{
     position: relative;
@@ -153,7 +151,7 @@
     transform: scale(1.05);
 }
 
-.home__products > button {
+.home__products .product__button {
     width: 160px;
     height: 300px;
     background-color: white;
@@ -165,26 +163,49 @@
     align-items: center;
     padding: 1%;
     color: black;
+    position: relative;
 }
 
-.home__products > button > img{
-    width:120px;
-    max-height: 150px;
+.home__products .product__button:hover{
+    /* border: 1px solid var(--green); */
+    box-shadow: 3px 3px 2px 2px rgb(61,71,46,0.5);
 }
 
-.product__description{
+.home__products .product__button > img{
+    width:80%;
+    height: 50%;
+    object-fit: contain;
+    position: absolute;
+    top: 10%;
+}
+
+.home__products .product__button:hover > img:hover{
+    transform: scale(1.05);
+    transition: transform 0.1s ease-in;
+}
+
+.home__products .product__description{
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    position: absolute;
+    bottom: 5%;
+    gap: 10px;
 }
 
-.product__description h4{
+.home__products .product__description h3{
+    width: 80%;
+    text-align: left;
+    font-size: 14px;
+}
+
+.home__products .product__description h4{
     margin: 0;
 }
 
-.product__section{
+.home__products .product__section{
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -192,8 +213,8 @@
     align-items: center;
 }
 
-.product__section button{
-    width: 35px;
+.home__products .product__section .product__add{
+    width: 30px;
     aspect-ratio: 1;
     border-radius: 17.5px;
     border: none;
@@ -203,6 +224,11 @@
     align-items: center;
 }
 
-.product__section button:hover{
-    transform: scale(1.05);
+.home__products .product__section .product__add:hover{
+    background-color: var(--green);
+}
+
+.home__products .product__section .product__add__icon{
+    width: 80%;
+    height: 80%;
 }

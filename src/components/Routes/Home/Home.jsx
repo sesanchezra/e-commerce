@@ -6,7 +6,7 @@ import { FiSearch } from "react-icons/fi"
 import { IconContext } from "react-icons"
 import { BsFilter } from "react-icons/bs"
 import { useForm } from 'react-hook-form'
-import { BsFillCartFill } from "react-icons/bs";
+import { BsPlusLg } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom'
 import Filter from '../Filter/Filter'
 import { BiArrowBack } from "react-icons/bi";
@@ -193,8 +193,8 @@ const Home = () => {
                                     <div className='product__section'>
                                         <h4>{`$ ${product.price}`}</h4>
                                         <button className='product__add' onClick={()=>addToCart(product.id)}>
-                                            <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
-                                                <BsFillCartFill />
+                                            <IconContext.Provider value={{ size: '1em', color: 'white' }}>
+                                                <BsPlusLg />
                                             </IconContext.Provider>
                                         </button>
                                     </div>
@@ -211,8 +211,8 @@ const Home = () => {
                                     <div className='product__section'>
                                         <h4>{`$ ${product.price}`}</h4>
                                         <button className='product__add' onClick={()=>addToCart(product.id)}>
-                                            <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
-                                                <BsFillCartFill />
+                                            <IconContext.Provider value={{ size: '0.8em', color: 'white' ,className:'product__add__icon' }}>
+                                                <BsPlusLg />
                                             </IconContext.Provider>
                                         </button>
                                     </div>
